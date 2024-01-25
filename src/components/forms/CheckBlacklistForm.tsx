@@ -1,12 +1,6 @@
 import { useRef } from "react";
-import CheckBlacklistFormProvider from "./CheckBlacklistFormProvider";
-import { FormContent } from "./FormContent";
+import { FormContent } from "./CheckBlacklist";
 
 export default function CheckBlacklistForm() {
-  //   const formRef = useRef<HTMLFormElement>(null);
-  return (
-    // <CheckBlacklistFormProvider formRef={formRef}>
-    <FormContent />
-    // </CheckBlacklistFormProvider>
-  );
+  return <FormContent />;
 }

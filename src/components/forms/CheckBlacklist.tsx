@@ -13,6 +13,7 @@ export default function CheckBlacklist() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [invalid, setInvalid] = useState<boolean>(false);
   const [data, setData] = useState<DocumentData[] | undefined>([]);
+  console.log(import.meta.env.VITE_FIREBASE_API_KEY);
 
   const checkBlacklist = async () => {
     setShowModal(true);

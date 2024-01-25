@@ -2,7 +2,7 @@ import { InputDefault } from "../Input";
 import { ButtonDefault } from "../Button";
 import { PrimaryOrangeButton } from "../../assets/style";
 import { useState } from "react";
-import { Modal } from "../BlacklistModal";
+import { Modal } from "../Modal";
 import { DocumentData } from "firebase/firestore";
 import { getBlacklistData } from "../../service/service";
 import { TfiAlert, TfiFaceSad, TfiFaceSmile } from "react-icons/tfi";

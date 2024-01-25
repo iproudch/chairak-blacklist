@@ -26,6 +26,7 @@ export function InputDefault(props: InputFromProps) {
           type={type}
           placeholder={placeholder}
           onChange={onChange}
+          crossOrigin={undefined}
         />
       </div>
       <Typography

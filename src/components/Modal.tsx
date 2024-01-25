@@ -13,13 +13,20 @@ export function Modal(props: DialogProps) {
 
   return (
     <>
-      <Dialog open={true} handler={handleOpen}>
-        <DialogBody divider className="grid place-items-center gap-4">
+      <Dialog open={true} handler={handleOpen} placeholder={undefined}>
+        <DialogBody
+          divider
+          className="grid place-items-center gap-4"
+          placeholder={undefined}
+        >
           {icon}
-          <Typography color="black" variant="h4">
+          <Typography color="black" variant="h4" placeholder={undefined}>
             {title}
           </Typography>
-          <Typography className="text-center font-normal">
+          <Typography
+            className="text-center font-normal"
+            placeholder={undefined}
+          >
             {content?.map((item) => (
               <div key={item.id}>
                 {item.name} {item.address && `ที่อยู่ ${item.address}`}

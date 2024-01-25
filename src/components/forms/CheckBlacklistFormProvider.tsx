@@ -35,7 +35,7 @@ export default function CheckBlacklistFormProvider(
     criteriaMode: "all",
     defaultValues,
     mode: "onSubmit",
-    resolver,
+    // resolver,
   });
 
   const { reset, handleSubmit } = formMethods;

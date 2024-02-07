@@ -10,9 +10,7 @@ env:
 
 on:
   push:
-    branches:
-      # -dev
-      - feat/deploy-setup
+    branches: -dev
 
 jobs:
   build:
@@ -44,8 +42,7 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
-    # if: github.ref == 'refs/heads/dev'
-    if: github.ref == 'refs/heads/feat/deploy-setup'
+    if: github.ref == 'refs/heads/dev'
 
     steps:
       - name: Download artifact

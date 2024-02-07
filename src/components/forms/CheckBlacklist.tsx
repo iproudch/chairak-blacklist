@@ -3,29 +3,27 @@ import { ButtonDefault } from "../Button";
 import { PrimaryOrangeButton } from "../../assets/style";
 import { useState } from "react";
 import { Modal } from "../Modal";
-import { DocumentData } from "firebase/firestore";
 import { getBlacklistData } from "../../service/service";
-import { TfiAlert, TfiFaceSad, TfiFaceSmile } from "react-icons/tfi";
+import { IBlacklist } from "../../interface/blacklist";
+import { ECreditLevel } from "../../constants/blacklist";
 
 export default function CheckBlacklist() {
   const [name, setName] = useState<string>("");
   const [address, setAddress] = useState<string | undefined>(undefined);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [invalid, setInvalid] = useState<boolean>(false);
-  const [data, setData] = useState<DocumentData[] | undefined>([]);
-  console.log("env", import.meta.env.VITE_FIREBASE_API_KEY);
+  const [data, setData] = useState<IBlacklist>(undefined);
 
   const checkBlacklist = async () => {
-    setShowModal(true);
-
     if (!name && !address) {
-      setInvalid(true);
-      setData([{ id: 0, name: "กรุณากรอกข้อมูลให้ครบถ้วน" }]);
+      setData({
+        data: [],
+        creditLevel: ECreditLevel.INVALID,
+      });
+      setShowModal(true);
       return;
     }
-
-    const res = await getBlacklistData(name, address);
-    setData(res);
+    setData(await getBlacklistData(name, address));
+    setShowModal(true);
   };
 
   const closeBlacklist = () => {
@@ -34,7 +32,7 @@ export default function CheckBlacklist() {
 
   return (
     <>
-      <div className="flex flex-col gap-3" id="bl" aria-hidden={true}>
+      <div className="flex flex-col gap-3" aria-hidden={true}>
         <InputDefault
           className="w-[25rem]"
           label={"ชื่อ-นามสกุล"}
@@ -55,30 +53,7 @@ export default function CheckBlacklist() {
         />
       </div>
       {showModal ? (
-        <Modal
-          handleOpen={() => closeBlacklist()}
-          content={data}
-          title={
-            data && data.length > 0 && !invalid
-              ? "เครดิตคุณไม่ผ่าน"
-              : !data
-              ? "เครดิตคุณผ่าน"
-              : invalid
-              ? "เกิดข้อผิดพลาด"
-              : ""
-          }
-          icon={
-            data && data.length > 0 && !invalid ? (
-              <TfiFaceSad color="red" size={"100"} />
-            ) : !data ? (
-              <TfiFaceSmile color="#4caf50" size={"100"} />
-            ) : invalid ? (
-              <TfiAlert color={"#fdd835"} size={"100"} />
-            ) : (
-              ""
-            )
-          }
-        />
+        <Modal handleOpen={() => closeBlacklist()} content={data} />
       ) : null}
     </>
   );

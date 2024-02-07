@@ -1,33 +1,56 @@
 import { Dialog, DialogBody, Typography } from "@material-tailwind/react";
-import { DocumentData } from "firebase/firestore";
-import React from "react";
+import React, { useMemo } from "react";
+import { ECreditLevel } from "../constants/blacklist";
+import { IBlacklist } from "../interface/blacklist";
+import { TfiAlert, TfiFaceSad, TfiFaceSmile } from "react-icons/tfi";
+
+export interface IModal {
+  desc?: string[];
+  creditLevel?: ECreditLevel;
+}
+
 type DialogProps = {
   handleOpen: () => void;
-  content?: DocumentData[];
-  title: string;
-  icon?: React.ReactNode;
+  content?: IBlacklist;
 };
 
 export function Modal(props: DialogProps) {
-  const { handleOpen, content, title, icon } = props;
+  const { handleOpen, content } = props;
+
+  const icon = useMemo(() => {
+    switch (content?.creditLevel) {
+      case ECreditLevel.PASS:
+        return <TfiFaceSmile size={100} color={"#4caf50"} />;
+      case ECreditLevel.FAIL:
+        return <TfiFaceSad size={100} color="red" />;
+      default:
+        return <TfiAlert size={100} color={"#fdd835"} />;
+    }
+  }, [content?.creditLevel]);
+
+  const creditLevelLabel = useMemo(() => {
+    switch (content?.creditLevel) {
+      case ECreditLevel.PASS:
+        return "เครดิตคุณผ่าน";
+      case ECreditLevel.FAIL:
+        return "เครดิตคุณไม่ผ่าน";
+      case ECreditLevel.INVALID:
+        return "กรุณากรอกข้อมูลให้ครบถ้วน";
+      default:
+        return "ไม่พบข้อมูล";
+    }
+  }, [content?.creditLevel]);
 
   return (
     <>
-      <Dialog open={true} handler={handleOpen} placeholder={undefined}>
-        <DialogBody
-          divider
-          className="grid place-items-center gap-4"
-          placeholder={undefined}
-        >
+      <Dialog open={true} handler={handleOpen}>
+        <DialogBody divider className="grid place-items-center gap-4">
           {icon}
-          <Typography color="black" variant="h4" placeholder={undefined}>
-            {title}
+          <Typography color="black" variant="h4">
+            {creditLevelLabel}
           </Typography>
-          <Typography
-            className="text-center font-normal"
-            placeholder={undefined}
-          >
-            {content?.map((item) => (
+          <Typography className="text-center font-normal">
+            {content?.data.map((item) => (
               <div key={item.id}>
                 {item.name} {item.address && `ที่อยู่ ${item.address}`}
               </div>

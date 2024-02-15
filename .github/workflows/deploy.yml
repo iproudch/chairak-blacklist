@@ -10,7 +10,8 @@ env:
 
 on:
   push:
-    branches: -dev # Deploy only from the dev branch
+    branches:
+      - dev
 
 jobs:
   build:

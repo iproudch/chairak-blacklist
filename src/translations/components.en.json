@@ -1,0 +1,18 @@
+{
+  "langSetting": "Change language to Thai",
+  "form": {
+    "name": {
+      "label": "Name - Surname",
+      "placeholder": "name surname",
+      "helperText": "Key in name with spaces between name and surname e.g. Smith Rich"
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "address details",
+      "helperText": "Key in address details e.g. 123 Main Street, Anytown, USA"
+    },
+    "button": {
+      "check": "Check"
+    }
+  }
+}

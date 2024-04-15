@@ -9,7 +9,8 @@ type ButtonProps = {
 };
 
 export function ButtonDefault(props: ButtonProps) {
-  const { label, className, type = "button", buttonStyle, onClick } = props;
+  const { label, buttonStyle, onClick } = props;
+
   return (
     <Button
       className="flex w-max gap-4"

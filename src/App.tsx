@@ -4,7 +4,7 @@ import CheckBlacklist from "./components/forms/CheckBlacklist";
 
 function App() {
   return (
-    <div className="flex flex-col gap-4 pt-8 pr-16 pb-8 pl-16">
+    <div className="flex flex-col gap-2 p-4 sm:gap-4 sm:p-4 md:p-8 lg:pt-8 lg:pr-72 lg:pb-8 lg:pl-16">
       <Header />
       <CheckBlacklist />
       <LanguageSwitcher />

@@ -14,5 +14,13 @@
     "button": {
       "check": "Check"
     }
+  },
+  "modal": {
+    "creditLevel": {
+      "pass": "Your credit is pass",
+      "fail": "Your credit is fail",
+      "invalid": "Please fill in some fields",
+      "default": "Not found"
+    }
   }
 }

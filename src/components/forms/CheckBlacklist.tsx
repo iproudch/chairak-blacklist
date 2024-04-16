@@ -36,19 +36,21 @@ export default function CheckBlacklist() {
     <>
       <div className="flex flex-col gap-3" aria-hidden={true}>
         <InputDefault
-          className="w-[25rem]"
+          className="w-full sm:w-[25rem]"
           label={t("form.name.label")}
           placeholder={t("form.name.placeholder")}
           helperText={t("form.name.helperText")}
           onChange={(e) => setName(e.target.value)}
         />
         <InputDefault
+          className="w-full"
           label={t("form.address.label")}
           placeholder={t("form.address.placeholder")}
           helperText={t("form.address.helperText")}
           onChange={(e) => setAddress(e.target.value)}
         />
         <ButtonDefault
+          className="w-full sm:w-auto"
           label={t("form.button.check")}
           buttonStyle={PrimaryOrangeButton}
           onClick={() => checkBlacklist()}

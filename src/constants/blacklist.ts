@@ -1,5 +1,5 @@
 export enum ECreditLevel {
-    PASS = "PASS",
-    FAIL = "FAIL",
-    INVALID = "INVALID",
+    PASS = "pass",
+    FAIL = "fail",
+    INVALID = "invalid",
   }

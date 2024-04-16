@@ -65,6 +65,18 @@ const cleanUserCredit: IBlacklist = {
 export async function getBlacklistData(name?: string, address?: string) {
   try {
     const collectionRef = collection(db, EFirebaseCollections.BLACKLIST);
+    if(address) {
+      let q = query(collectionRef, where('address', "==", address));
+      const querySnapshot = await getDocs(q);
+      if(querySnapshot.empty) {
+        q = query(collectionRef,
+          where('name', '>=', name),
+          where('name', '<=', name + '\uf8ff')
+        );
+      }
+      return setResponseData(querySnapshot, address);
+    }
+
     if (name) {
       let q = undefined;
       if (/\s/.test(name)) {
@@ -83,17 +95,6 @@ export async function getBlacklistData(name?: string, address?: string) {
      return setResponseData(await getDocs(q), name);
     }
 
-    if(address) {
-      let q = query(collectionRef, where('address', "==", address));
-      const querySnapshot = await getDocs(q);
-      if(querySnapshot.empty) {
-        q = query(collectionRef,
-          where('name', '>=', name),
-          where('name', '<=', name + '\uf8ff')
-        );
-      }
-      return setResponseData(querySnapshot, address);
-    }
     return undefined;
   } catch (error) {
     console.error("Error querying collection data:", error);

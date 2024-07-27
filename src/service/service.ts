@@ -27,7 +27,7 @@ export enum EFirebaseCollections {
 //     }
 //   }
 
-export async function fetchCollectionData() {
+export async function getAllBlacklistUser() {
   try {
     const collectionRef = collection(db, EFirebaseCollections.BLACKLIST);
     const querySnapshot = await getDocs(collectionRef);
@@ -36,23 +36,6 @@ export async function fetchCollectionData() {
     return data;
   } catch (error) {
     console.error("Error fetching collection data:", error);
-    return [];
-  }
-}
-
-export async function queryCollectionData(column: string, columnValue: string) {
-  try {
-    const collectionRef = collection(db, EFirebaseCollections.BLACKLIST);
-
-    const q = query(collectionRef, where(column, "==", columnValue));
-
-    const querySnapshot = await getDocs(q);
-
-    const data = querySnapshot.docs.map((doc) => doc.data());
-    console.log(JSON.stringify(data));
-    return data;
-  } catch (error) {
-    console.error("Error querying collection data:", error);
     return [];
   }
 }

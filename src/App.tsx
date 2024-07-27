@@ -1,14 +1,17 @@
-import Header from "./components/Header";
-import LanguageSwitcher from "./components/LanguageSwitcher";
-import CheckBlacklist from "./components/forms/CheckBlacklist";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AppRoutes from "./AppRoutes";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
-    <div className="flex flex-col gap-2 p-4 sm:gap-4 sm:p-4 md:p-8 lg:pt-8 lg:pr-72 lg:pb-8 lg:pl-16">
-      <Header />
-      <CheckBlacklist />
-      <LanguageSwitcher />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter basename="/chairak-blacklist">
+        <Routes>
+          <Route path="/*" element={<AppRoutes />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

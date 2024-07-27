@@ -30,19 +30,6 @@ export function Modal(props: DialogProps) {
     }
   }, [content?.creditLevel]);
 
-  const creditLevelLabel = useMemo(() => {
-    switch (content?.creditLevel) {
-      case ECreditLevel.PASS:
-        return "เครดิตคุณผ่าน";
-      case ECreditLevel.FAIL:
-        return "เครดิตคุณไม่ผ่าน";
-      case ECreditLevel.INVALID:
-        return "กรุณากรอกข้อมูลให้ครบถ้วน";
-      default:
-        return "ไม่พบข้อมูล";
-    }
-  }, [content?.creditLevel]);
-
   return (
     <>
       <Dialog open={true} handler={handleOpen}>

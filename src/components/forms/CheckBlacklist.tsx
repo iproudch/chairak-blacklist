@@ -6,12 +6,14 @@ import { Modal } from "../Modal";
 import { getBlacklistData } from "../../service/service";
 import { IBlacklist } from "../../interface/blacklist";
 import { ECreditLevel } from "../../constants/blacklist";
+import { useTranslation } from "react-i18next";
 
 export default function CheckBlacklist() {
   const [name, setName] = useState<string>("");
   const [address, setAddress] = useState<string | undefined>(undefined);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [data, setData] = useState<IBlacklist>(undefined);
+  const { t } = useTranslation("components");
 
   const checkBlacklist = async () => {
     if (!name && !address) {
@@ -34,20 +36,22 @@ export default function CheckBlacklist() {
     <>
       <div className="flex flex-col gap-3" aria-hidden={true}>
         <InputDefault
-          className="w-[25rem]"
-          label={"ชื่อ-นามสกุล"}
-          placeholder="ชื่อ นามสกุล"
-          helperText={" กรอกชื่อ เว้นวรรค นามสกุล ตัวอย่าง สมหวัง รวยพันล้าน"}
+          className="w-full sm:w-[25rem]"
+          label={t("form.name.label")}
+          placeholder={t("form.name.placeholder")}
+          helperText={t("form.name.helperText")}
           onChange={(e) => setName(e.target.value)}
         />
         <InputDefault
-          label={"ที่อยู่"}
-          placeholder="บ้านเลขที่ หมู่ ตำบล อำเภอ"
-          helperText={" กรอกที่อยู่แบบสมบูรณ์ เช่น 999 ม.1 ต.รวยจัง อ.มากมาย"}
+          className="w-full"
+          label={t("form.address.label")}
+          placeholder={t("form.address.placeholder")}
+          helperText={t("form.address.helperText")}
           onChange={(e) => setAddress(e.target.value)}
         />
         <ButtonDefault
-          label={"ตรวจสอบ"}
+          className="w-full sm:w-auto"
+          label={t("form.button.check")}
           buttonStyle={PrimaryOrangeButton}
           onClick={() => checkBlacklist()}
         />

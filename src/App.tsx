@@ -1,12 +1,17 @@
-import Header from "./components/Header";
-import CheckBlacklist from "./components/forms/CheckBlacklist";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AppRoutes from "./AppRoutes";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
-    <div className="flex flex-col gap-4 pt-8 pr-16 pb-8 pl-16">
-      <Header />
-      <CheckBlacklist />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter basename="/chairak-blacklist">
+        <Routes>
+          <Route path="/*" element={<AppRoutes />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

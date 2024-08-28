@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import { ECreditLevel } from "../constants/blacklist";
 import { IBlacklist } from "../interface/blacklist";
 import { TfiAlert, TfiFaceSad, TfiFaceSmile } from "react-icons/tfi";
+import { useTranslation } from "react-i18next";
 
 export interface IModal {
   desc?: string[];
@@ -15,6 +16,7 @@ type DialogProps = {
 };
 
 export function Modal(props: DialogProps) {
+  const { t } = useTranslation("components");
   const { handleOpen, content } = props;
 
   const icon = useMemo(() => {
@@ -28,26 +30,13 @@ export function Modal(props: DialogProps) {
     }
   }, [content?.creditLevel]);
 
-  const creditLevelLabel = useMemo(() => {
-    switch (content?.creditLevel) {
-      case ECreditLevel.PASS:
-        return "เครดิตคุณผ่าน";
-      case ECreditLevel.FAIL:
-        return "เครดิตคุณไม่ผ่าน";
-      case ECreditLevel.INVALID:
-        return "กรุณากรอกข้อมูลให้ครบถ้วน";
-      default:
-        return "ไม่พบข้อมูล";
-    }
-  }, [content?.creditLevel]);
-
   return (
     <>
       <Dialog open={true} handler={handleOpen}>
         <DialogBody divider className="grid place-items-center gap-4">
           {icon}
           <Typography color="black" variant="h4">
-            {creditLevelLabel}
+            {t(`modal.creditLevel.${content?.creditLevel}`)}
           </Typography>
           <Typography className="text-center font-normal">
             {content?.data.map((item) => (

@@ -3,8 +3,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 enum ELanguage {
-  TH = "th",
   EN = "en",
+  TH = "th",
 }
 
 const Languages = [ELanguage.EN, ELanguage.TH];
@@ -19,11 +19,20 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex justify-end">
-      <Switch crossOrigin={undefined} onChange={() => changeLanguage()} />
-      <p className="ml-2 text-sm text-gray-600">
-        {t("components:langSetting")}
-      </p>
+    <div className="flex">
+      {Object.entries(ELanguage).map(([key, value]) => (
+        <button
+          key={key}
+          className={`px-2 py-1 text-sm  font-semibold transition-colors duration-500 ${
+            value === i18n.language
+              ? "bg-[#FF7043] text-white"
+              : "bg-[#e5e5e5] text-black"
+          }`}
+          onClick={() => changeLanguage()}
+        >
+          {t(`languages:${key}`)}
+        </button>
+      ))}
     </div>
   );
 }

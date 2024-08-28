@@ -13,8 +13,8 @@ export default function AppRoutes(): JSX.Element {
         <Route index element={<LoginPage />} />
         <Route element={<ProtectedRoute />}>
           <Route element={<ApplicationLayout />}>
-            <Route path="/search" element={<SearchBlacklistPage />} />
-            <Route path="/list" element={<AllBlacklistPage />} />
+            <Route path="search" element={<SearchBlacklistPage />} />
+            <Route path="list" element={<AllBlacklistPage />} />
           </Route>
         </Route>
         <Route path="*" element={<p>Not Found</p>} />

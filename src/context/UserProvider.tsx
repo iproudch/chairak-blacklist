@@ -50,8 +50,9 @@ function AuthProvider(props: AuthProviderProps) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(
       firebaseAuth,
-      (currentUser: User) => {
+      (currentUser: User | null) => {
         setUser(currentUser);
+        setLoading(false);
       }
     );
 
